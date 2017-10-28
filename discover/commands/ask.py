@@ -8,3 +8,4 @@ class Ask(Base):
 
     def run(self):
         print('assskkkkkkk!')
+        print(" ".join(self.options['<question>']))
