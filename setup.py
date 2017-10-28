@@ -3,7 +3,7 @@
 
 from codecs import open
 from os.path import abspath, dirname, join
-from subprocess import call
+# from subprocess import call
 
 from setuptools import Command, find_packages, setup
 
@@ -49,3 +49,7 @@ setup(
     },
     # cmdclass = {'test': RunTests},
 )
+
+'''
+    Credit: https://github.com/rdegges/skele-cli/edit/master/skele/cli.py
+'''
