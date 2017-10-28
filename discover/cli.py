@@ -3,6 +3,7 @@ discover
 
 Usage:
   discover hello
+  discover ask 
   discover -h | --help
   discover --version
 
@@ -12,7 +13,7 @@ Options:
 
 Examples:
   discover hello
-  discover teach me about Albert Einstein
+  discover ask 
 
 Help:
   For help using this tool, please open an issue on the Github repository:
@@ -45,4 +46,5 @@ def main():
 
 '''
 	Credit: https://github.com/rdegges/skele-cli/edit/master/skele/cli.py
+  teach me about Albert Einstein
 '''
