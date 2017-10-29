@@ -4,18 +4,16 @@ from .base import Base
 import re, requests, json
 
 
-class Ask(Base):
+class Want(Base):
     """Print the user's question"""
 
     def run(self):
-        print('assskkkkkkk!')
-        print(" ".join(self.options['<question>']))
-        question = " ".join(self.options['<question>'])
+        print('iiii!')
+        print(self.options['<topic>'])
+
 
         # parse 
-        search_topic = re.match(r'I want to learn about (.*)', question)
-        search_topic = search_topic.group(1)
-        # print(search_topic)
+        search_topic = self.options['<topic>']
 
         # query wikidata for desc
         api_url = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + search_topic
@@ -34,15 +32,14 @@ class Ask(Base):
 
         # query wikidata for topics
         level = 1
-        sections = narrow(title, level)
+        sections = self.narrow(title, level)
         print("What about " + title + " would you like to learn?")
         for sec in sections: 
             print(sec["name"])
-
         
 
 
-    def narrow(title, level):
+    def narrow(self, title, level):
         
         # query wikidata for inner sections
         api_url = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=sections&page=" + title

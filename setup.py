@@ -45,6 +45,7 @@ setup(
     entry_points = {
         'console_scripts': [
             'discover=discover.cli:main',
+            'I=discover.cli:main',
         ],
     },
     # cmdclass = {'test': RunTests},

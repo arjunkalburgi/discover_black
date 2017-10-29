@@ -2,10 +2,19 @@
 discover
 
 Usage:
-  discover hello
-  discover ask <question>...
+  discover want to learn about <topic>
+  discover want <topic>
+  
+  I want to learn about <topic>
+  discover ask I want to learn about <topic>
+  I want <topic>
   discover -h | --help
   discover --version
+  I --version
+  discover hello
+  discover ask I want to learn about <topic>
+  discover ask <question>...
+
 
 Options:
   -h --help                         Show this screen.
@@ -14,6 +23,7 @@ Options:
 Examples:
   discover hello
   discover ask Teach me about Albert Einstien 
+  I want to learn about <topic>
 
 Help:
   For help using this tool, please open an issue on the Github repository:
@@ -35,7 +45,7 @@ def main():
 
     # Here we'll try to dynamically match the command the user is trying to run
     # with a pre-defined command class we've already created.
-    for (k, v) in options.items(): 
+    for (k, v) in options.items():
         if hasattr(discover.commands, k) and v:
             module = getattr(discover.commands, k)
             discover.commands = getmembers(module, isclass)
