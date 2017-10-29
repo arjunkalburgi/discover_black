@@ -2,8 +2,8 @@
 discover
 
 Usage:
-  discover want to learn about <topic>
-  discover want <topic>
+  discover want to learn about <topic>...
+  discover want to learn <topic>...
   
   I want to learn about <topic>
   discover ask I want to learn about <topic>
