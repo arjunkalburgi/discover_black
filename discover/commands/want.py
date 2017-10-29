@@ -82,8 +82,14 @@ class Want(Base):
         nextt = sections[[sec["name"] for sec in sections].index(answers["size"])]
         # give me resources 
         if [sec['name'] for sec in sections].index(answers["size"]) is 0: 
-            print("uhhhh resources on " + sec['name'] + " to come :D \n\n")
-            self.selectnext(sections, title)
+            res = self.getres(title)
+            if (len(res) > 0): 
+                print("Saving resources...")
+                print([item['title'] for item in res])
+                print("Above has been saved to your library")
+            else: 
+                print("resource lookup error")
+            quit()
         # go back
         elif (answers["size"] is "Back"): 
             self.selectnext(nextt["sections"], nextt["title"])
@@ -95,8 +101,6 @@ class Want(Base):
         # search new
         else: 
             self.getdesc(nextt["name"], description_api + nextt["title"])
-
-
 
 
     def narrow(self, title, level):
@@ -123,3 +127,24 @@ class Want(Base):
 
         return moretopics[0:4]
 
+
+    def getres(self, title): 
+        response = requests.get("https://learn-anything.xyz/api/maps/?q=" + title.replace(" ", "+"))
+        if (response.status_code is not 200): 
+            print("fail")
+            quit()
+            
+        data = json.loads(response.content)
+        dataa = [item for item in data if item.get('key') == title.lower()]
+        if len(dataa) is not 0: 
+            response = requests.get("https://learn-anything.xyz/api/maps/" + dataa[0]['id'])
+            if (response.status_code is not 200): 
+                print("fail")
+                quit()
+                
+            data = json.loads(response.content)['nodes']
+            dataaa = [{"title": item.get('nodes')[0]['text'], "url": item.get('nodes')[0]['url']} for item in data if len(item.get('nodes')) > 0]
+            return dataaa
+        else: 
+            print("error in learn-anything")
+            return "errr"
