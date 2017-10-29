@@ -1,7 +1,7 @@
 """The main command for asking questions"""
 
 from .base import Base
-import re, requests, json, inquirer, unicodedata
+import re, requests, json, inquirer, unicodedata, Algorithmia
 
 full_api = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" 
 description_api = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" 
@@ -41,7 +41,11 @@ class Want(Base):
 
         elif (u'extract' in extract and extract[u'extract'] is not u'') : 
             # is the proper description
-            print(extract[u'extract'])
+            client = Algorithmia.client('simDyTFFYXL1fSEX+m50s4r4NbK1')
+            algo = client.algo('nlp/Summarizer/0.1.6')
+            result = algo.pipe([extract[u'extract'], 2]).result
+            print(result)
+
             self.findsections(data)
 
         else: 
@@ -62,7 +66,7 @@ class Want(Base):
         # TODO no sections
 
         # make user select from sections
-        print("What about " + title + " would you like to learn?")
+        print("\nWhat about " + title + " would you like to learn?")
         self.selectnext(sections, title)
 
 
