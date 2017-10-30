@@ -73,7 +73,7 @@ def getres(title):
         dataaa = [{"title": item.get('nodes')[0]['text'], "url": item.get('nodes')[0]['url']} for item in data if len(item.get('nodes')) > 0]
         print(dataaa)
     else: 
-        print("ugh")
+        print("error in learn-anything")
 
 getres("finance")
 

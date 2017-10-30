@@ -147,4 +147,4 @@ class Want(Base):
             return dataaa
         else: 
             print("error in learn-anything")
-            return "errr"
+            return []
